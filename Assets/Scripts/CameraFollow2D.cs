@@ -5,19 +5,44 @@ using UnityEngine;
 public class CameraFollow2D : MonoBehaviour
 {
 
-    public GameObject player; 
- 
-    float depth=5f;
-    float verticalOffset = 1f;
-    public float horizontalOffset = 2f;
+    public GameObject player;
 
-  
-    
-    private void Update()
+    Vector3 PlayerPosition; 
+    public float PosZ; 
+    public bool FollowPlayer;
+    public float MaxY; 
+    public float MinY;
+    public float ValY;
+    public float BasVal; 
+        
+   
+
+
+
+    private void Start()
     {
-        Vector3 Offest = new Vector3(depth, verticalOffset, horizontalOffset);
-        transform.position = player.transform.position + Offest;
+        PosZ = transform.position.z;
+    }
+     void FixedUpdate()
+    {
+        if (FollowPlayer)
+        {
+            ValY = MinY;
+        }
+        if (player.GetComponent<CharacterController2D>().RightOrLeft == false)
+        {
+            PlayerPosition = new Vector3(player.transform.position.x + BasVal, ValY, PosZ);
+        }
+        else
+        {
+            PlayerPosition = new Vector3(player.transform.position.x - BasVal, ValY, PosZ);
+        }
+
+        transform.position = Vector3.Lerp(transform.position, PlayerPosition, Time.deltaTime);
+
     }
 
-
 }
+
+
+

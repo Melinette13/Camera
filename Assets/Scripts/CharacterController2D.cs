@@ -5,18 +5,19 @@ using UnityEngine;
 public class CharacterController2D : MonoBehaviour
 {
     public float speed;
-    public float DashSpeed = 35f;
-    public float NormalSpeed = 5f;
+    public float DashSpeed ;
+    public float NormalSpeed;
 
     public float jumpAmount = 5.0f;
 
     public bool isOnGround = true;
 
-    private float horizontalInput;
 
     private float fowardInput;
 
     private Rigidbody playerRb;
+
+    public bool RightOrLeft; 
 
 
 
@@ -38,7 +39,7 @@ public class CharacterController2D : MonoBehaviour
 
         // get player input 
 
-        horizontalInput = Input.GetAxis("Horizontal");
+        ;
 
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -54,10 +55,21 @@ public class CharacterController2D : MonoBehaviour
 
 
         // Move the player foward
+        if (Input.GetKey(KeyCode.RightArrow)) 
+        {
+            RightOrLeft = true; 
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0 ,0));
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            RightOrLeft = true;
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
+        }
 
 
-
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * horizontalInput);
+        
 
 
 
