@@ -13,7 +13,7 @@ public class CharacterController2D : MonoBehaviour
     public bool isOnGround = true;
 
 
-    private float fowardInput;
+
 
     private Rigidbody playerRb;
 
@@ -59,13 +59,13 @@ public class CharacterController2D : MonoBehaviour
         {
             RightOrLeft = true; 
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0 ,0));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 90 ,0));
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            RightOrLeft = true;
+            RightOrLeft = false;
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
+            transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
         }
 
 
