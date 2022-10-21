@@ -17,7 +17,6 @@ public class CameraFollow2D : MonoBehaviour
     public float ValY;
     public float MedY;
     public float BasVal;
-    public float MedBasVal;
     public float offest; 
     
 
@@ -27,11 +26,14 @@ public class CameraFollow2D : MonoBehaviour
     private void Start()
     {
         PosZ = transform.position.z;
+        FollowPlayer = true;
     }
      void FixedUpdate()
     {
-        if (FollowPlayer)
+        if (FollowPlayer==true)
         {
+            ValY = player.transform.position.y;
+
             if (ValY<= MinY)
             {
                 ValY = MinY;
@@ -46,7 +48,7 @@ public class CameraFollow2D : MonoBehaviour
             }
             else
             {
-                ValY = player.transform.position.y;
+               ValY = player.transform.position.y;
             }
           }
 
@@ -63,16 +65,16 @@ public class CameraFollow2D : MonoBehaviour
        }
         else
         {
+             ValY = MedY;
 
-            ValY = MedY;
 
             if (player.GetComponent<CharacterController2D>().RightOrLeft == false)
             {
-                PlayerPosition = new Vector3(player.transform.position.x + MedBasVal, ValY, PosZ - offest);
+                PlayerPosition = new Vector3(player.transform.position.x + BasVal, ValY, PosZ - offest);
             }
             else
             {
-                PlayerPosition = new Vector3(player.transform.position.x - MedBasVal, ValY, PosZ - offest);
+                PlayerPosition = new Vector3(player.transform.position.x - BasVal, ValY, PosZ - offest);
             }
 
             transform.position = Vector3.Lerp(transform.position, PlayerPosition, Time.deltaTime );
